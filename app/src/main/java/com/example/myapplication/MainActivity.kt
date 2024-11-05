@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -50,6 +51,11 @@ class MainActivity : AppCompatActivity() {
     private fun signIn(email: String, password: String) {
         val result = verifySignIn(email, password)
         Toast.makeText(this, result, Toast.LENGTH_LONG).show()
+        if (result == "Sign in successful"){
+            setContentView(R.layout.emails)
+            val intent = Intent(this, EmailsActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun verifySignIn(email: String, password: String): String {
