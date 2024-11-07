@@ -54,6 +54,8 @@ class MainActivity : AppCompatActivity() {
         if (result == "Sign in successful"){
             setContentView(R.layout.emails)
             val intent = Intent(this, EmailsActivity::class.java)
+            intent.putExtra("email", email)
+            //intent.putExtra("password", password)
             startActivity(intent)
         }
     }
