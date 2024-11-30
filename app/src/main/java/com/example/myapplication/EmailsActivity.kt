@@ -1,14 +1,29 @@
 package com.example.myapplication
 
+import EmailAdapter
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class EmailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.emails)
+
+        val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        val emailList = listOf(
+            Email("Meeting at 10", "boss@example.com", "Please be on time"),
+            Email("Project update", "team@example.com", "The project is on track")
+            // Añade más correos electrónicos a la lista
+        )
+
+        val adapter = EmailAdapter(emailList)
+        recyclerView.adapter = adapter
 
         // Obtén el email del intent
         val email = intent.getStringExtra("user_email")

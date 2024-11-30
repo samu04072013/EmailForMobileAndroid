@@ -112,3 +112,4 @@ class MainActivity : AppCompatActivity() {
 }
 
 data class User(val email: String, val password: String)
+data class Email(val subject: String, val sender: String, val preview: String)
