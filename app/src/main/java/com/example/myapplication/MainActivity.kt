@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
+val emails: MutableList<Map<String, List<String>>> = mutableListOf(mapOf("email" to listOf("samu@catmail.com")))
+
 class MainActivity : AppCompatActivity() {
     private lateinit var createAccountButton: Button
     private lateinit var signInButton: Button
@@ -45,19 +47,21 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Usuario de ejemplo
-        users.add(User("benjamincurtis@example-pet-store.com", "123456"))
+        users.add(User("samu@catmail.com", "123456"))
     }
 
     private fun signIn(email: String, password: String) {
         val result = verifySignIn(email, password)
         Toast.makeText(this, result, Toast.LENGTH_LONG).show()
-        if (result == "Sign in successful"){
-            setContentView(R.layout.emails)
-            val intent = Intent(this, EmailsActivity::class.java)
-            intent.putExtra("email", email)
-            //intent.putExtra("password", password)
-            startActivity(intent)
+        if (result == "Sign in successful") {
+            posSignIn(email)
         }
+    }
+
+    private fun posSignIn(email: String) {
+        val intent = Intent(this, EmailsActivity::class.java)
+        intent.putExtra("user_email", email)
+        startActivity(intent)
     }
 
     private fun verifySignIn(email: String, password: String): String {

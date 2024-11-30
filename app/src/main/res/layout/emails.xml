@@ -5,22 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/newEmail"
-        android:layout_width="79dp"
-        android:layout_height="74dp"
-        android:layout_margin="16dp"
-        android:gravity="center"
-        app:icon="@android:drawable/ic_input_add"
-        app:iconGravity="textEnd"
-        app:iconPadding="0dp"
-        app:iconSize="80dp"
-        tools:layout_editor_absoluteX="316dp"
-        tools:layout_editor_absoluteY="641dp" />
-
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="298dp"
+        tools:layout_editor_absoluteY="656dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
