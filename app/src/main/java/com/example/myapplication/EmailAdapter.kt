@@ -18,6 +18,7 @@ class EmailAdapter(private val emailList: List<Email>) : RecyclerView.Adapter<Em
             val email = emailList[position]
             holder.subject.text = email.subject
             holder.sender.text = email.sender
+            holder.recipents.text = email.recipents.joinToString(",")
             holder.preview.text = email.preview
         }
         catch (e: Exception) {
@@ -30,6 +31,7 @@ class EmailAdapter(private val emailList: List<Email>) : RecyclerView.Adapter<Em
     class EmailViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val subject: TextView = itemView.findViewById(R.id.email_subject)
         val sender: TextView = itemView.findViewById(R.id.email_sender)
+        val recipents: TextView = itemView.findViewById(R.id.email_recipents)
         val preview: TextView = itemView.findViewById(R.id.email_preview)
     }
 }

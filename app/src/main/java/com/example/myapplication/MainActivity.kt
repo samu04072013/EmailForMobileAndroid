@@ -9,8 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-val emails: MutableList<Map<String, List<String>>> = mutableListOf(mapOf("email" to listOf("samu@catmail.com")))
-
 class MainActivity : AppCompatActivity() {
     private lateinit var createAccountButton: Button
     private lateinit var signInButton: Button
@@ -112,4 +110,4 @@ class MainActivity : AppCompatActivity() {
 }
 
 data class User(val email: String, val password: String)
-data class Email(val subject: String, val sender: String, val preview: String)
+data class Email(val subject: String, val sender: String, val recipents: List<String>, val preview: String)
