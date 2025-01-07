@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import okhttp3.OkHttpClient
+import okhttp3.Request
 
 class MainActivity : AppCompatActivity() {
     private lateinit var createAccountButton: Button
@@ -45,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Usuario de ejemplo
-        users.add(User("samu@catmail.com", "123456"))
+        users.add(User("mail", "123"))
     }
 
     private fun signIn(email: String, password: String) {
@@ -68,8 +70,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Verifica si el usuario existe
-        val user = users.find { it.email == email && it.password == password }
-        return if (user != null) {
+        //val user = users.find { it.email == email && it.password == password }
+
+        val client = OkHttpClient()
+        val request = Request.Builder()
+            .url("https://10.0.2.2:7110/Email/LogIn?correo=$email&contrasenna=$password")
+            .build()
+        val response = client.newCall(request).execute()
+        return if (response.equals(true)) {
             "Sign in successful"
         } else {
             "Sign in failed"
