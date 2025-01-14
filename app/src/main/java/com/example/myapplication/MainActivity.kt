@@ -10,6 +10,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import java.util.concurrent.Callable
+import java.util.concurrent.Executors
 
 class MainActivity : AppCompatActivity() {
     private lateinit var createAccountButton: Button
@@ -71,19 +73,29 @@ class MainActivity : AppCompatActivity() {
 
         // Verifica si el usuario existe
         //val user = users.find { it.email == email && it.password == password }
+        var answer = ""
+        val thread = Thread {
+            try {
+                val client = OkHttpClient()
+                val request = Request.Builder()
+                    .url("https://10.0.2.2:7110/Email/LogIn?correo=$email&contrasenna=$password")
+                    .build()
+                val response = client.newCall(request).execute()
+                if (response.equals(true)) {
+                    answer = "Sign in successful"
+                } else {
+                    answer = "Sign in failed"
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                answer = "An error has occurred"
+            }
 
-        val client = OkHttpClient()
-        val request = Request.Builder()
-            .url("https://10.0.2.2:7110/Email/LogIn?correo=$email&contrasenna=$password")
-            .build()
-        val response = client.newCall(request).execute()
-        return if (response.equals(true)) {
-            "Sign in successful"
-        } else {
-            "Sign in failed"
         }
-    }
 
+        thread.start()
+        return answer
+    }
     private fun createAccount(email: String, password: String) {
         val result = verifyCreateAccount(email, password)
         Toast.makeText(this, result, Toast.LENGTH_LONG).show()
